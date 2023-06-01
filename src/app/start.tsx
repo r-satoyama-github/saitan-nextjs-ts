@@ -1,5 +1,5 @@
 "use client";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { PrimaryButton } from "~/components/buttons/primary-button";
@@ -19,7 +19,7 @@ export const Start = () => {
   const { setIsComplete, setIsPlaying } = completeContext;
 
   // Auth Github
-  const { signInWithGithub, error, session } = useAuth();
+  // const { signInWithGithub, error, session } = useAuth();
 
   // Use Router
   const router = useRouter();
@@ -34,7 +34,7 @@ export const Start = () => {
     setIsPlaying(true);
   }, []);
 
-  if (session) router.push("/game");
+  // if (session) router.push("/game");
 
   return (
     <>
@@ -44,10 +44,9 @@ export const Start = () => {
           <PrimaryButton onClick={onClickPrimary}>
             ゲストではじめる
           </PrimaryButton>
-          <PrimaryButton onClick={signInWithGithub}>
-            サインインしてから
-          </PrimaryButton>
-          {error && <p>{error}</p>}
+          {/* <PrimaryButton onClick={signInWithGithub}> */}
+          <PrimaryButton>サインインしてから</PrimaryButton>
+          {/* {error && <p>{error}</p>} */}
         </SButtonColumnContainer>
       </SColumnContainer>
     </>

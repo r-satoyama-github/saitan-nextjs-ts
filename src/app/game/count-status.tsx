@@ -2,7 +2,7 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { RowContainer } from "~/components/containers/row-container";
 import { CountStatusContext } from "~/components/providers/count-status-provider";
-import { Text } from "~/components/texts/Text";
+import { Text } from "~/components/texts/text";
 
 export const CountStatus = () => {
   const countStatusContext = useContext(CountStatusContext);

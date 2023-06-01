@@ -1,8 +1,12 @@
-import { memo } from "react";
+import { FC, ReactNode, memo } from "react";
 import styled from "styled-components";
 import { BaseLink } from "./base-link";
 
-export const PrimaryLink = memo(function PrimaryLink(props) {
+type Props = {
+  children: ReactNode;
+  href: string;
+};
+export const PrimaryLink: FC<Props> = memo((props) => {
   const { children, href } = props;
   console.log("PrimaryLink Rendered");
   return (

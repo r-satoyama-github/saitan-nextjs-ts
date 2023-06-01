@@ -5,7 +5,7 @@ import Image from "next/image";
 import { CountStatusContext } from "~/components/providers/count-status-provider";
 import { CompleteContext } from "~/components/providers/complete-provider";
 import { Number } from "~/types/number";
-import { Text } from "~/components/texts/Text";
+import { Text } from "~/components/texts/text";
 import { ColumnContainer } from "~/components/containers/column-container";
 import { RowContainer } from "~/components/containers/row-container";
 
@@ -71,9 +71,7 @@ export const Order: FC<Props> = (props) => {
   // return useMemo(() => {
   return (
     <>
-      <ColumnContainer id="list">
-        {console.log("Order List", items)}
-        {console.log("Order List", itemHistories)}
+      <ColumnContainer>
         {items.map((item: Number, index: number) => {
           return (
             <SItemRowContainer

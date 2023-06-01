@@ -4,7 +4,7 @@ import { BaseButton } from "./base-button";
 
 type Props = {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   style?: {};
 };
 export const PrimaryButton: FC<Props> = memo((props) => {

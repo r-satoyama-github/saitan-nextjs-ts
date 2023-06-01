@@ -13,7 +13,7 @@ export default function Page() {
   const completeContext = useContext(CompleteContext);
   const { isComplete, isPlaying } = completeContext;
 
-  const { session } = useAuth();
+  // const { session } = useAuth();
 
   console.log("Page IsComplete", isComplete);
   console.log("Page IsPlaying", isPlaying);
@@ -22,7 +22,7 @@ export default function Page() {
       <ColumnContainer>
         <div style={{ height: "5vh" }}></div>
 
-        {session && <LogoutButton />}
+        {/* {session && <LogoutButton />} */}
         {isComplete && !isPlaying ? <Result /> : <PlayField />}
       </ColumnContainer>
     </>

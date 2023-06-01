@@ -25,8 +25,8 @@ type CountStatusContextType = {
   setCount: (count: number) => void;
   seconds: number;
   setSeconds: (seconds: number) => void;
-  itemHistories: Array<Number>;
-  setItemHistories: (itemHistroies: Array<Number>) => void;
+  itemHistories: Array<Array<Number>>;
+  setItemHistories: (itemHistroies: Array<Array<Number>>) => void;
   start: () => void;
   stop: () => void;
 };
@@ -38,7 +38,7 @@ export const CountStatusProvider: FC<Props> = (props) => {
   const { children } = props;
   const [count, setCount] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
-  const [itemHistories, setItemHistories] = useState<Array<Number>>([]);
+  const [itemHistories, setItemHistories] = useState<Array<Array<Number>>>([]);
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 

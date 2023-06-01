@@ -11,19 +11,20 @@ import { CountStatus } from "./count-status";
 import { Order } from "./order";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
-import { Text } from "~/components/texts/Text";
+import { Text } from "~/components/texts/text";
 import { RowContainer } from "~/components/containers/row-container";
+import { Number } from "~/types/number";
 
 export const PlayField = () => {
   console.log("PlayField Rendering");
-  const fixItems = [
+  const fixItems: Array<Number> = [
     { id: 2, color: "rgba(30, 190, 62,0.5)" },
     { id: 1, color: "rgba(117, 201, 68,0.5)" },
     { id: 3, color: "rgba(22, 3, 123,0.5)" },
     { id: 4, color: "rgba(187, 200, 121,0.5)" },
     { id: 5, color: "rgba(192, 19, 112,0.5)" },
   ];
-  const [items, setItems] = useState(fixItems);
+  const [items, setItems] = useState<Array<Number>>(fixItems);
 
   const countStatusContext = useContext(CountStatusContext);
   const gameContext = useContext(GameContext);
@@ -51,7 +52,7 @@ export const PlayField = () => {
     if (count < 1) return;
     setCount(count - 1);
     setItems(itemHistories[count - 1]);
-    setItemHistories([itemHistories.pop()]);
+    setItemHistories([itemHistories.pop()!!]);
   };
 
   // リセットボタン押下処理;
@@ -81,7 +82,7 @@ export const PlayField = () => {
   // return useMemo(() => {
   return (
     <>
-      <Header text={user} />
+      <Header />
       <ColumnContainer>
         <Heading2>1から順にSAITANでならべよう</Heading2>
 

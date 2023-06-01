@@ -5,7 +5,7 @@ import useAuth from "~/components/hooks/useAuth";
 import { CompleteContext } from "~/components/providers/complete-provider";
 import { CountStatusContext } from "~/components/providers/count-status-provider";
 import { GameContext } from "~/components/providers/game-provider";
-import { Text } from "~/components/texts/Text";
+import { Text } from "~/components/texts/text";
 import { Heading1 } from "~/components/texts/heading1";
 import { Heading2 } from "~/components/texts/heading2";
 import { Ranker } from "./ranker";
@@ -25,8 +25,8 @@ export const Result = () => {
   const completeContext = useContext(CompleteContext);
   const { setIsComplete, setIsPlaying } = completeContext;
 
-  const { session, profileFromGithub } = useAuth();
-  const { nickName, avatarUrl } = profileFromGithub;
+  // const { session, profileFromGithub } = useAuth();
+  // const { nickName, avatarUrl } = profileFromGithub;
 
   console.log("CountStatusContext", countStatusContext);
   console.log("GameContext", gameContext);
@@ -39,7 +39,7 @@ export const Result = () => {
   return (
     <>
       <SColumnContainer>
-        <Text>{nickName}</Text>
+        {/* <Text>{nickName}</Text> */}
         <Heading1 style={{}}>けっか</Heading1>
         <MyResultColumnContainer>
           <Text>かうんと:{count}</Text>

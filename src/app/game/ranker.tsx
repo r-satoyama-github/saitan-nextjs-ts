@@ -1,6 +1,10 @@
+import { FC, ReactNode } from "react";
 import styled from "styled-components";
 
-export const Ranker = (props) => {
+type Props = {
+  children: ReactNode;
+};
+export const Ranker: FC<Props> = (props) => {
   const { children } = props;
   const rank = "1";
   const name = "ゲスト1さんAAA";
