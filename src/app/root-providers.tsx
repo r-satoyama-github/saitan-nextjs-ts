@@ -1,10 +1,15 @@
 "use client";
 
+import { FC, ReactNode } from "react";
 import { CompleteProvider } from "~/components/providers/complete-provider";
 import { CountStatusProvider } from "~/components/providers/count-status-provider";
 import { GameProvider } from "~/components/providers/game-provider";
 
-export function RootProviders({ children }) {
+type Props = {
+  children: ReactNode;
+};
+export const RootProviders: FC<Props> = (props) => {
+  const { children } = props;
   return (
     <GameProvider>
       <CompleteProvider>
@@ -12,4 +17,4 @@ export function RootProviders({ children }) {
       </CompleteProvider>
     </GameProvider>
   );
-}
+};

@@ -4,7 +4,7 @@ import styled from "styled-components";
 type Props = {
   children: ReactNode;
 };
-export const Ranker: FC<Props> = (props) => {
+export const RankerText: FC<Props> = (props) => {
   const { children } = props;
   const rank = "1";
   const name = "ゲスト1さんAAA";

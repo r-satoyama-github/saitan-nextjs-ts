@@ -8,7 +8,7 @@ import { GameContext } from "~/components/providers/game-provider";
 import { Text } from "~/components/texts/text";
 import { Heading1 } from "~/components/texts/heading1";
 import { Heading2 } from "~/components/texts/heading2";
-import { Ranker } from "./ranker";
+import { RankerText } from "./ranker-text";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
 
@@ -57,9 +57,9 @@ export const Result = () => {
         <RankingColumnContainer>
           <Heading2>らんきんぐ</Heading2>
           <ColumnContainer>
-            <Ranker>ゲスト1さん　２回　10:00</Ranker>
-            <Ranker>ゲスト2さん　２回　11:00</Ranker>
-            <Ranker>ゲスト3さん　３回　10:00</Ranker>
+            <RankerText>ゲスト1さん　２回　10:00</RankerText>
+            <RankerText>ゲスト2さん　２回　11:00</RankerText>
+            <RankerText>ゲスト3さん　３回　10:00</RankerText>
           </ColumnContainer>
         </RankingColumnContainer>
 

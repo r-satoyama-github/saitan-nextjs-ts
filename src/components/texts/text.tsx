@@ -1,11 +1,8 @@
-import { FC, ReactNode } from "react";
+import { FC } from "react";
 import styled from "styled-components";
+import { ChildrenStyleProps } from "~/types/children-style-props";
 
-type Props = {
-  style?: {};
-  children: ReactNode;
-};
-export const Text: FC<Props> = (props) => {
+export const Text: FC<ChildrenStyleProps> = (props) => {
   const { style = {}, children } = props;
   return (
     <>
