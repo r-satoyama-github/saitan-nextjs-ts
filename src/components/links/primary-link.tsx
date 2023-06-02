@@ -6,7 +6,7 @@ type Props = {
   children: ReactNode;
   href: string;
 };
-export const PrimaryLink: FC<Props> = memo((props) => {
+export const PrimaryLink: FC<Props> = memo(function PrimaryLink(props) {
   const { children, href } = props;
   console.log("PrimaryLink Rendered");
   return (

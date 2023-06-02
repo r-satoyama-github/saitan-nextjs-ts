@@ -7,7 +7,7 @@ type Props = {
   onClick?: () => void;
   style?: {};
 };
-export const PrimaryButton: FC<Props> = memo((props) => {
+export const PrimaryButton: FC<Props> = memo(function PrimaryButton(props) {
   console.log("PrimaryButton Rendering");
   const { children, onClick, style } = props;
   return (
