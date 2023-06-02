@@ -10,13 +10,14 @@ import { PlayField } from "./play-field";
 
 export default function Page() {
   console.log("Game Page Rendering");
+  // Contextの取得
   const completeContext = useContext(CompleteContext);
+
+  // Contextから関数の取得
   const { isComplete, isPlaying } = completeContext;
 
   // const { session } = useAuth();
 
-  console.log("Page IsComplete", isComplete);
-  console.log("Page IsPlaying", isPlaying);
   return (
     <>
       <ColumnContainer>

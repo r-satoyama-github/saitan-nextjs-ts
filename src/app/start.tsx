@@ -5,34 +5,39 @@ import styled from "styled-components";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import { ColumnContainer } from "~/components/containers/column-container";
 import useAuth from "~/components/hooks/useAuth";
+import { useInit } from "~/components/hooks/useInit";
 import { CompleteContext } from "~/components/providers/complete-provider";
 import { GameContext } from "~/components/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
 
 export const Start = () => {
-  // GameContext
+  // Contextの取得
   const context = useContext(GameContext);
+  const completeContext = useContext(CompleteContext);
+
+  // Contextから関数の取得
   const { user, setUser } = context;
 
-  // CompleteContext
-  const completeContext = useContext(CompleteContext);
-  const { setIsComplete, setIsPlaying } = completeContext;
+  // Hooksの取得
+  const router = useRouter();
+
+  // カスタムHooksの取得
+  const { initiateGame } = useInit();
 
   // Auth Github
   // const { signInWithGithub, error, session } = useAuth();
 
-  // Use Router
-  const router = useRouter();
+  // 初回実行処理
+  useEffect(() => {
+    initiateGame();
+  }, []);
 
+  // ボタン等のイベント関数
+  // ゲーム画面遷移関数
   const onClickPrimary = () => {
     setUser("TEST USER");
     router.push("/game");
   };
-
-  useEffect(() => {
-    setIsComplete(false);
-    setIsPlaying(true);
-  }, []);
 
   // if (session) router.push("/game");
 

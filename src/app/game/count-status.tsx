@@ -5,7 +5,10 @@ import { CountStatusContext } from "~/components/providers/count-status-provider
 import { Text } from "~/components/texts/text";
 
 export const CountStatus = () => {
+  // Contextの取得
   const countStatusContext = useContext(CountStatusContext);
+
+  // Contextから関数の取得
   const { count, seconds } = countStatusContext;
 
   return (

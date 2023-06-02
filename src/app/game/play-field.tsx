@@ -17,6 +17,18 @@ import { Number } from "~/types/number";
 
 export const PlayField = () => {
   console.log("PlayField Rendering");
+  // Contextの取得
+  const countStatusContext = useContext(CountStatusContext);
+  const gameContext = useContext(GameContext);
+  const completeContext = useContext(CompleteContext);
+
+  // Contextから関数の取得
+  const { count, setCount, itemHistories, setItemHistories, start } =
+    countStatusContext;
+  const { user } = gameContext;
+  const { isComplete, setIsPlaying } = completeContext;
+
+  // 変数の定義
   const fixItems: Array<Number> = [
     { id: 2, color: "rgba(30, 190, 62,0.5)" },
     { id: 1, color: "rgba(117, 201, 68,0.5)" },
@@ -24,29 +36,28 @@ export const PlayField = () => {
     { id: 4, color: "rgba(187, 200, 121,0.5)" },
     { id: 5, color: "rgba(192, 19, 112,0.5)" },
   ];
+
+  // Stateの定義
   const [items, setItems] = useState<Array<Number>>(fixItems);
 
-  const countStatusContext = useContext(CountStatusContext);
-  const gameContext = useContext(GameContext);
-  const completeContext = useContext(CompleteContext);
-  const {
-    count,
-    seconds,
-    setCount,
-    itemHistories,
-    setItemHistories,
-    start,
-    stop,
-  } = countStatusContext;
-  const { user } = gameContext;
-  const { isComplete, setIsPlaying } = completeContext;
+  // 初回実行処理
+  useEffect(() => {
+    // 最初の一回のみカウント開始
+    start();
 
-  // const [userItems, setUserItems] = useState(fixItems);
+    // 最初の並びを履歴に追加
+    itemHistories.push([...fixItems]);
+    setItemHistories([...itemHistories]);
+  }, []);
+
+  // イベント関数
+  // 結果ボタン押下
   const onClickResult = () => {
     console.log("Result Click", gameContext);
     setIsPlaying(false);
   };
 
+  // 戻るボタン押下
   const onClickBack = () => {
     console.log("OnClick Back");
     if (count < 1) return;
@@ -55,7 +66,7 @@ export const PlayField = () => {
     setItemHistories([itemHistories.pop()!!]);
   };
 
-  // リセットボタン押下処理;
+  // リセットボタン押下;
   const onClickReset = () => {
     console.log("ResetButton Clicked");
     // 経過時間を00:00にする必要がある
@@ -67,19 +78,6 @@ export const PlayField = () => {
     }
   };
 
-  useEffect(() => {
-    // 最初の一回のみカウント開始
-    start();
-
-    // 最初の並びを履歴に追加
-    console.log("First ItemHistories", itemHistories);
-    itemHistories.push([...fixItems]);
-    setItemHistories([...itemHistories]);
-  }, []);
-
-  // start();
-
-  // return useMemo(() => {
   return (
     <>
       <Header />
@@ -110,7 +108,6 @@ export const PlayField = () => {
       </ColumnContainer>
     </>
   );
-  // }, [isComplete]);
 };
 
 const SRowContainer = styled(RowContainer)`

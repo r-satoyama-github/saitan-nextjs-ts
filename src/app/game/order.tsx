@@ -16,21 +16,17 @@ type Props = {
 export const Order: FC<Props> = (props) => {
   console.log("Order Rendering");
   const { items, setItems } = props;
-  // console.log("Order Rendering UserItems", orderItems);
 
-  // リストに表示するアイテム
-
-  console.log("Order Rendering Items", items);
-
-  // CountStatusContext
+  // Contextの取得
   const countStatusContext = useContext(CountStatusContext);
+  const completeContext = useContext(CompleteContext);
+
+  // Contextから関数の取得
   const { count, setCount, itemHistories, setItemHistories, start, stop } =
     countStatusContext;
-
-  // CompleteContext
-  const completeContext = useContext(CompleteContext);
   const { setIsComplete } = completeContext;
 
+  // イベント関数
   const CheckOrderAndCountUp = () => {
     // 並び替えカウントアップ
     setCount(count + 1);
@@ -50,7 +46,7 @@ export const Order: FC<Props> = (props) => {
     setItems([...items]);
   };
 
-  // 上と並び替える
+  // 上ボタン押下
   const onClickUp = (index: number) => {
     if (index != 0) {
       items.splice(index - 1, 2, items[index], items[index - 1]);
@@ -59,7 +55,7 @@ export const Order: FC<Props> = (props) => {
     CheckOrderAndCountUp();
   };
 
-  // 下と並び替える
+  // 下ボタン押下
   const onClickDown = (index: number) => {
     if (index != items.length - 1) {
       items.splice(index, 2, items[index + 1], items[index]);
@@ -68,7 +64,6 @@ export const Order: FC<Props> = (props) => {
     CheckOrderAndCountUp();
   };
 
-  // return useMemo(() => {
   return (
     <>
       <ColumnContainer>
@@ -102,7 +97,6 @@ export const Order: FC<Props> = (props) => {
       </ColumnContainer>
     </>
   );
-  // }, [orderItems]);
 };
 
 // 並びのチェック
