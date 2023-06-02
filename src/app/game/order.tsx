@@ -2,8 +2,8 @@
 import styled from "styled-components";
 import { FC, memo, useContext, useEffect, useMemo, useState } from "react";
 import Image from "next/image";
-import { CountStatusContext } from "~/components/providers/count-status-provider";
-import { CompleteContext } from "~/components/providers/complete-provider";
+import { CountStatusContext } from "~/providers/count-status-provider";
+import { CompleteContext } from "~/providers/complete-provider";
 import { Number } from "~/types/number";
 import { Text } from "~/components/texts/text";
 import { ColumnContainer } from "~/components/containers/column-container";

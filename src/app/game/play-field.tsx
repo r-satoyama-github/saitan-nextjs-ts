@@ -3,9 +3,9 @@
 import { useContext, useEffect, useState } from "react";
 import { ColumnContainer } from "~/components/containers/column-container";
 import Header from "~/components/layouts/header";
-import { CompleteContext } from "~/components/providers/complete-provider";
-import { CountStatusContext } from "~/components/providers/count-status-provider";
-import { GameContext } from "~/components/providers/game-provider";
+import { CompleteContext } from "~/providers/complete-provider";
+import { CountStatusContext } from "~/providers/count-status-provider";
+import { GameContext } from "~/providers/game-provider";
 import { Heading2 } from "~/components/texts/heading2";
 import { CountStatus } from "./count-status";
 import { Order } from "./order";

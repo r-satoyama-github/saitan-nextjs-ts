@@ -3,8 +3,8 @@
 import { useContext } from "react";
 import LogoutButton from "~/components/buttons/logout-button";
 import { ColumnContainer } from "~/components/containers/column-container";
-import useAuth from "~/components/hooks/useAuth";
-import { CompleteContext } from "~/components/providers/complete-provider";
+import useAuth from "~/hooks/useAuth";
+import { CompleteContext } from "~/providers/complete-provider";
 import { Result } from "./result";
 import { PlayField } from "./play-field";
 

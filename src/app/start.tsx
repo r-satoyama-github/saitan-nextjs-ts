@@ -4,10 +4,10 @@ import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import { ColumnContainer } from "~/components/containers/column-container";
-import useAuth from "~/components/hooks/useAuth";
-import { useInit } from "~/components/hooks/useInit";
-import { CompleteContext } from "~/components/providers/complete-provider";
-import { GameContext } from "~/components/providers/game-provider";
+import useAuth from "~/hooks/useAuth";
+import { useInit } from "~/hooks/useInit";
+import { CompleteContext } from "~/providers/complete-provider";
+import { GameContext } from "~/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
 
 export const Start = () => {
@@ -32,7 +32,7 @@ export const Start = () => {
     initiateGame();
   }, []);
 
-  // ボタン等のイベント関数
+  // イベント関数
   // ゲーム画面遷移関数
   const onClickPrimary = () => {
     setUser("TEST USER");

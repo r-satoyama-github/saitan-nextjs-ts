@@ -1,10 +1,10 @@
 import { useRouter } from "next/navigation";
 import { useContext } from "react";
 import { ColumnContainer } from "~/components/containers/column-container";
-import useAuth from "~/components/hooks/useAuth";
-import { CompleteContext } from "~/components/providers/complete-provider";
-import { CountStatusContext } from "~/components/providers/count-status-provider";
-import { GameContext } from "~/components/providers/game-provider";
+import useAuth from "~/hooks/useAuth";
+import { CompleteContext } from "~/providers/complete-provider";
+import { CountStatusContext } from "~/providers/count-status-provider";
+import { GameContext } from "~/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
 import { Heading2 } from "~/components/texts/heading2";
 import { RankerText } from "../../components/texts/ranker-text";

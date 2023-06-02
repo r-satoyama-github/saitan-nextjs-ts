@@ -1,9 +1,9 @@
 "use client";
 
 import { FC, ReactNode } from "react";
-import { CompleteProvider } from "~/components/providers/complete-provider";
-import { CountStatusProvider } from "~/components/providers/count-status-provider";
-import { GameProvider } from "~/components/providers/game-provider";
+import { CompleteProvider } from "~/providers/complete-provider";
+import { CountStatusProvider } from "~/providers/count-status-provider";
+import { GameProvider } from "~/providers/game-provider";
 
 type Props = {
   children: ReactNode;

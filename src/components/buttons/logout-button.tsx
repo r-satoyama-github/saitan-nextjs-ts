@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { GameContext } from "../providers/game-provider";
-import useAuth from "../hooks/useAuth";
+import { GameContext } from "../../providers/game-provider";
+import useAuth from "../../hooks/useAuth";
 
 const LogoutButton = () => {
   const gameContext = useContext(GameContext);

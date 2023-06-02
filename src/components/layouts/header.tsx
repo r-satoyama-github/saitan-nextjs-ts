@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { RowContainer } from "../containers/row-container";
-import useAuth from "../hooks/useAuth";
+import useAuth from "../../hooks/useAuth";
 import { Text } from "../texts/text";
 
 export default function Header() {
