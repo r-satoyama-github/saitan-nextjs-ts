@@ -1,35 +1,15 @@
-import { useContext } from "react";
+import { FC, useContext } from "react";
 import styled from "styled-components";
 import { RowContainer } from "~/components/containers/row-container";
-import { CountStatusContext } from "~/providers/count-status-provider";
-import { Text } from "~/components/texts/text";
+import { CountText } from "./count-text";
+import { SecondsText } from "./seconds-text";
 
-export const CountStatus = () => {
-  // Contextの取得
-  const countStatusContext = useContext(CountStatusContext);
-
-  // Contextから関数の取得
-  const { count, seconds } = countStatusContext;
-
+export const CountStatus: FC = () => {
   return (
-    <>
-      <SStatusRowContainer>
-        <Text>
-          かうんと：<SSpan>{count}</SSpan>
-        </Text>
-        <Text>
-          けいか：
-          <SSpan>
-            {(() => {
-              const result2 = new Date(seconds * 1000)
-                .toISOString()
-                .slice(14, 19);
-              return result2;
-            })()}
-          </SSpan>
-        </Text>
-      </SStatusRowContainer>
-    </>
+    <SStatusRowContainer>
+      <CountText />
+      <SecondsText />
+    </SStatusRowContainer>
   );
 };
 

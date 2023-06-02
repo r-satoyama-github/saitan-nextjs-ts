@@ -2,8 +2,10 @@
 
 import { FC, ReactNode } from "react";
 import { CompleteProvider } from "~/providers/complete-provider";
-import { CountStatusProvider } from "~/providers/count-status-provider";
+import { CountProvider } from "~/providers/count-provider";
 import { GameProvider } from "~/providers/game-provider";
+import { ItemHistoryProvider } from "~/providers/item-history-provider";
+import { SecondsProvider } from "~/providers/seconds-provider";
 
 type Props = {
   children: ReactNode;
@@ -13,7 +15,11 @@ export const RootProviders: FC<Props> = (props) => {
   return (
     <GameProvider>
       <CompleteProvider>
-        <CountStatusProvider>{children}</CountStatusProvider>
+        <SecondsProvider>
+          <CountProvider>
+            <ItemHistoryProvider>{children}</ItemHistoryProvider>
+          </CountProvider>
+        </SecondsProvider>
       </CompleteProvider>
     </GameProvider>
   );

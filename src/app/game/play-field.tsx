@@ -1,32 +1,36 @@
 "use client";
 
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { ColumnContainer } from "~/components/containers/column-container";
 import Header from "~/components/layouts/header";
 import { CompleteContext } from "~/providers/complete-provider";
-import { CountStatusContext } from "~/providers/count-status-provider";
 import { GameContext } from "~/providers/game-provider";
 import { Heading2 } from "~/components/texts/heading2";
 import { CountStatus } from "./count-status";
-import { Order } from "./order";
+import { Order } from "./number-card-list";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
 import { Text } from "~/components/texts/text";
 import { RowContainer } from "~/components/containers/row-container";
 import { Number } from "~/types/number";
+import { ItemHistoryContext } from "~/providers/item-history-provider";
+import { CountContext } from "~/providers/count-provider";
+import { SecondsContext } from "~/providers/seconds-provider";
 
 export const PlayField = () => {
   console.log("PlayField Rendering");
   // Contextの取得
-  const countStatusContext = useContext(CountStatusContext);
-  const gameContext = useContext(GameContext);
+  const countContext = useContext(CountContext);
+  const secondsContext = useContext(SecondsContext);
   const completeContext = useContext(CompleteContext);
+  const itemHistoryContext = useContext(ItemHistoryContext);
 
   // Contextから関数の取得
-  const { count, setCount, itemHistories, setItemHistories, start } =
-    countStatusContext;
-  const { user } = gameContext;
+  // const { count, setCount, start, stop } = useCountTimer();
+  const { count, setCount } = countContext;
+  const { countTimerStart, countTimerStop } = secondsContext;
   const { isComplete, setIsPlaying } = completeContext;
+  const { itemHistories, setItemHistories } = itemHistoryContext;
 
   // 変数の定義
   const fixItems: Array<Number> = [
@@ -43,7 +47,7 @@ export const PlayField = () => {
   // 初回実行処理
   useEffect(() => {
     // 最初の一回のみカウント開始
-    start();
+    countTimerStart();
 
     // 最初の並びを履歴に追加
     itemHistories.push([...fixItems]);
@@ -53,21 +57,20 @@ export const PlayField = () => {
   // イベント関数
   // 結果ボタン押下
   const onClickResult = () => {
-    console.log("Result Click", gameContext);
     setIsPlaying(false);
   };
 
   // 戻るボタン押下
-  const onClickBack = () => {
+  const onClickBack = useCallback(() => {
     console.log("OnClick Back");
     if (count < 1) return;
     setCount(count - 1);
     setItems(itemHistories[count - 1]);
     setItemHistories([itemHistories.pop()!!]);
-  };
+  }, []);
 
   // リセットボタン押下;
-  const onClickReset = () => {
+  const onClickReset = useCallback(() => {
     console.log("ResetButton Clicked");
     // 経過時間を00:00にする必要がある
     // stop();
@@ -76,7 +79,7 @@ export const PlayField = () => {
     if (confirm("リセットしてやり直しますか？")) {
       window.location.reload();
     }
-  };
+  }, []);
 
   return (
     <>
@@ -88,7 +91,11 @@ export const PlayField = () => {
         <CountStatus />
 
         {/* リスト表示 */}
-        <Order items={items} setItems={setItems} />
+        <Order
+          items={items}
+          setItems={setItems}
+          countTimerStop={countTimerStop}
+        />
 
         {/* 戻る、リセットボタン 並び替えが未完了の場合表示 */}
         {isComplete || (

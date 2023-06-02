@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { ColumnContainer } from "~/components/containers/column-container";
 import useAuth from "~/hooks/useAuth";
 import { CompleteContext } from "~/providers/complete-provider";
-import { CountStatusContext } from "~/providers/count-status-provider";
 import { GameContext } from "~/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
 import { Heading2 } from "~/components/texts/heading2";
@@ -11,16 +10,24 @@ import { RankerText } from "../../components/texts/ranker-text";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
 import { Text } from "~/components/texts/text";
+import { CountContext } from "~/providers/count-provider";
+import { SecondsContext } from "~/providers/seconds-provider";
+import { useCountTimer } from "~/hooks/useCountTimer";
 
 export const Result = () => {
   // Contextの取得
   const gameContext = useContext(GameContext);
-  const countStatusContext = useContext(CountStatusContext);
+  // const countStatusContext = useContext(CountStatusContext);
+  // const countContext = useContext(CountContext);
+  // const secondsContext = useContext(SecondsContext);
   const completeContext = useContext(CompleteContext);
 
   // Contextから関数の取得
   const { user } = gameContext;
-  const { count, seconds } = countStatusContext;
+  // const { count, seconds } = countStatusContext;
+  const { count, seconds } = useCountTimer();
+  // const { count } = countContext;
+  // const { seconds } = secondsContext;
   const { setIsComplete, setIsPlaying } = completeContext;
 
   // const { session, profileFromGithub } = useAuth();

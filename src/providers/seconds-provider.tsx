@@ -7,42 +7,31 @@ import {
   useRef,
   useState,
 } from "react";
-import { Number } from "~/types/number";
 
-export const CountStatusContext = createContext<CountStatusContextType>({
-  count: 0,
-  setCount: (count) => {},
+export const SecondsContext = createContext<SecondsContextType>({
   seconds: 0,
   setSeconds: (seconds) => {},
-  itemHistories: [],
-  setItemHistories: (itemHistroies) => {},
-  start: () => {},
-  stop: () => {},
+  countTimerStart: () => {},
+  countTimerStop: () => {},
 });
 
-type CountStatusContextType = {
-  count: number;
-  setCount: (count: number) => void;
+type SecondsContextType = {
   seconds: number;
   setSeconds: (seconds: number) => void;
-  itemHistories: Array<Array<Number>>;
-  setItemHistories: (itemHistroies: Array<Array<Number>>) => void;
-  start: () => void;
-  stop: () => void;
+  countTimerStart: () => void;
+  countTimerStop: () => void;
 };
 
 type Props = {
   children: ReactNode;
 };
-export const CountStatusProvider: FC<Props> = (props) => {
+export const SecondsProvider: FC<Props> = (props) => {
   const { children } = props;
-  const [count, setCount] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
-  const [itemHistories, setItemHistories] = useState<Array<Array<Number>>>([]);
 
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
-  const start = useCallback(() => {
+  const countTimerStart = useCallback(() => {
     console.log("Count Start Called");
     if (intervalRef.current !== null) {
       return;
@@ -53,7 +42,7 @@ export const CountStatusProvider: FC<Props> = (props) => {
     }, 1000);
   }, []);
 
-  const stop = useCallback(() => {
+  const countTimerStop = useCallback(() => {
     console.log("Count Stop Called");
     if (intervalRef.current === null) {
       return;
@@ -64,19 +53,15 @@ export const CountStatusProvider: FC<Props> = (props) => {
   }, []);
 
   return (
-    <CountStatusContext.Provider
+    <SecondsContext.Provider
       value={{
-        count,
-        setCount,
         seconds,
         setSeconds,
-        itemHistories,
-        setItemHistories,
-        start,
-        stop,
+        countTimerStart,
+        countTimerStop,
       }}
     >
       {children}
-    </CountStatusContext.Provider>
+    </SecondsContext.Provider>
   );
 };

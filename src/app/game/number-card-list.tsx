@@ -1,30 +1,44 @@
 "use client";
 import styled from "styled-components";
-import { FC, memo, useContext, useEffect, useMemo, useState } from "react";
+import {
+  FC,
+  memo,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import Image from "next/image";
-import { CountStatusContext } from "~/providers/count-status-provider";
+import { SecondsContext } from "~/providers/seconds-provider";
 import { CompleteContext } from "~/providers/complete-provider";
 import { Number } from "~/types/number";
 import { Text } from "~/components/texts/text";
 import { ColumnContainer } from "~/components/containers/column-container";
 import { RowContainer } from "~/components/containers/row-container";
+import { useCountTimer } from "~/hooks/useCountTimer";
+import { ItemHistoryContext } from "~/providers/item-history-provider";
+import { CountContext } from "~/providers/count-provider";
+import { NumberCard } from "./number-card";
 
 type Props = {
   items: Array<Number>;
   setItems: (items: Array<Number>) => void;
+  countTimerStop: () => void;
 };
-export const Order: FC<Props> = (props) => {
+export const Order: FC<Props> = memo((props) => {
   console.log("Order Rendering");
-  const { items, setItems } = props;
+  const { items, setItems, countTimerStop } = props;
 
   // Contextの取得
-  const countStatusContext = useContext(CountStatusContext);
+  const countContext = useContext(CountContext);
   const completeContext = useContext(CompleteContext);
+  const itemHistoryContext = useContext(ItemHistoryContext);
 
   // Contextから関数の取得
-  const { count, setCount, itemHistories, setItemHistories, start, stop } =
-    countStatusContext;
+  const { count, setCount } = countContext;
   const { setIsComplete } = completeContext;
+  const { itemHistories, setItemHistories } = itemHistoryContext;
 
   // イベント関数
   const CheckOrderAndCountUp = () => {
@@ -33,7 +47,7 @@ export const Order: FC<Props> = (props) => {
 
     // 整列しているかどうかのチェック
     if (IsOrdered(items.length, items)) {
-      stop();
+      countTimerStop();
       setIsComplete(true);
     }
 
@@ -47,57 +61,40 @@ export const Order: FC<Props> = (props) => {
   };
 
   // 上ボタン押下
-  const onClickUp = (index: number) => {
+  const onClickUp = useCallback((index: number) => {
     if (index != 0) {
       items.splice(index - 1, 2, items[index], items[index - 1]);
     }
     // 並びのチェックとカウントアップ
     CheckOrderAndCountUp();
-  };
+  }, []);
 
   // 下ボタン押下
-  const onClickDown = (index: number) => {
+  const onClickDown = useCallback((index: number) => {
     if (index != items.length - 1) {
       items.splice(index, 2, items[index + 1], items[index]);
     }
     // 並びのチェックとカウントアップ
     CheckOrderAndCountUp();
-  };
+  }, []);
 
   return (
     <>
       <ColumnContainer>
         {items.map((item: Number, index: number) => {
           return (
-            <SItemRowContainer
+            <NumberCard
               key={item.id}
-              style={{ backgroundColor: item.color }}
-            >
-              <Image
-                src="/triangle.svg"
-                onClick={() => onClickDown(index)}
-                width={30}
-                height={30}
-                style={{ rotate: "180deg" }}
-                alt="DOWN"
-              />
-              <Text style={{ fontSize: "20px", fontWeight: "bold" }}>
-                {item.id}
-              </Text>
-              <Image
-                src="/triangle.svg"
-                onClick={() => onClickUp(index)}
-                width={30}
-                height={30}
-                alt="UP"
-              />
-            </SItemRowContainer>
+              item={item}
+              onClickUp={() => onClickUp(index)}
+              onClickDown={() => onClickDown(index)}
+            />
           );
         })}
       </ColumnContainer>
     </>
   );
-};
+});
 
 // 並びのチェック
 const IsOrdered = (until: number, items: Array<Number>) => {
@@ -108,13 +105,3 @@ const IsOrdered = (until: number, items: Array<Number>) => {
   }
   return true;
 };
-
-const SItemRowContainer = styled(RowContainer)`
-  background-color: var(--yellow-50);
-  justify-content: space-around;
-  height: 50px;
-  align-items: center;
-  width: 90%;
-  margin-top: 10px;
-  border-radius: 10px;
-`;
