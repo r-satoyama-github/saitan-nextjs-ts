@@ -9,6 +9,7 @@ import { useInit } from "~/hooks/useInit";
 import { CompleteContext } from "~/providers/complete-provider";
 import { GameContext } from "~/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
+import { Heading2 } from "~/components/texts/heading2";
 
 export const Start = () => {
   // Contextの取得
@@ -44,7 +45,11 @@ export const Start = () => {
   return (
     <>
       <SColumnContainer>
-        <Heading1 style={{}}>サイタン</Heading1>
+        <ColumnContainer>
+          <Heading1 style={{}}>サイタン</Heading1>
+          <Heading2 style={{}}>サイタンヲ　テニスルノハ　ダレダ？</Heading2>
+        </ColumnContainer>
+
         <SButtonColumnContainer>
           <PrimaryButton onClick={onClickPrimary}>
             ゲスト　ハジメル

@@ -31,7 +31,7 @@ const SHeader = styled.header`
   top: 0;
   width: 100%;
   box-sizing: border-box;
-  background-color: var(--yellow-50);
+  background-color: var(--navy-50);
   height: 5vh;
 `;
 
