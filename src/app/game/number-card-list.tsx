@@ -1,22 +1,8 @@
 "use client";
-import styled from "styled-components";
-import {
-  FC,
-  memo,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
-import Image from "next/image";
-import { SecondsContext } from "~/providers/seconds-provider";
+import { FC, memo, useCallback, useContext } from "react";
 import { CompleteContext } from "~/providers/complete-provider";
 import { Number } from "~/types/number";
-import { Text } from "~/components/texts/text";
 import { ColumnContainer } from "~/components/containers/column-container";
-import { RowContainer } from "~/components/containers/row-container";
-import { useCountTimer } from "~/hooks/useCountTimer";
 import { ItemHistoryContext } from "~/providers/item-history-provider";
 import { CountContext } from "~/providers/count-provider";
 import { NumberCard } from "./number-card";
@@ -42,6 +28,7 @@ export const Order: FC<Props> = memo((props) => {
 
   // イベント関数
   const CheckOrderAndCountUp = () => {
+    console.log("CountUP", count);
     // 並び替えカウントアップ
     setCount(count + 1);
 
@@ -61,22 +48,28 @@ export const Order: FC<Props> = memo((props) => {
   };
 
   // 上ボタン押下
-  const onClickUp = useCallback((index: number) => {
-    if (index != 0) {
-      items.splice(index - 1, 2, items[index], items[index - 1]);
-    }
-    // 並びのチェックとカウントアップ
-    CheckOrderAndCountUp();
-  }, []);
+  const onClickUp = useCallback(
+    (index: number) => {
+      if (index != 0) {
+        items.splice(index - 1, 2, items[index], items[index - 1]);
+      }
+      // 並びのチェックとカウントアップ
+      CheckOrderAndCountUp();
+    },
+    [CheckOrderAndCountUp, items]
+  );
 
   // 下ボタン押下
-  const onClickDown = useCallback((index: number) => {
-    if (index != items.length - 1) {
-      items.splice(index, 2, items[index + 1], items[index]);
-    }
-    // 並びのチェックとカウントアップ
-    CheckOrderAndCountUp();
-  }, []);
+  const onClickDown = useCallback(
+    (index: number) => {
+      if (index != items.length - 1) {
+        items.splice(index, 2, items[index + 1], items[index]);
+      }
+      // 並びのチェックとカウントアップ
+      CheckOrderAndCountUp();
+    },
+    [CheckOrderAndCountUp, items]
+  );
 
   return (
     <>

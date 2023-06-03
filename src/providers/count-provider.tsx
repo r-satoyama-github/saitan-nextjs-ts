@@ -1,5 +1,4 @@
 import { FC, ReactNode, createContext, useState } from "react";
-import { Number } from "~/types/number";
 
 export const CountContext = createContext<CountContextType>({
   count: 0,
