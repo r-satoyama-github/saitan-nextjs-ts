@@ -7,7 +7,7 @@ import { CompleteContext } from "~/providers/complete-provider";
 import { GameContext } from "~/providers/game-provider";
 import { Heading2 } from "~/components/texts/heading2";
 import { CountStatus } from "./count-status";
-import { Order } from "./number-card-list";
+import { NumberCardList } from "./number-card-list";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
 import { Text } from "~/components/texts/text";
@@ -26,11 +26,11 @@ export const PlayField = () => {
   const itemHistoryContext = useContext(ItemHistoryContext);
 
   // Contextから関数の取得
-  // const { count, setCount, start, stop } = useCountTimer();
   const { count, setCount } = countContext;
   const { countTimerStart, countTimerStop } = secondsContext;
   const { isComplete, setIsPlaying } = completeContext;
-  const { itemHistories, setItemHistories } = itemHistoryContext;
+  const { items, setItems, itemHistories, setItemHistories } =
+    itemHistoryContext;
 
   // 変数の定義
   const fixItems: Array<Number> = [
@@ -41,17 +41,10 @@ export const PlayField = () => {
     { id: 5, color: "rgba(192, 19, 112,0.5)" },
   ];
 
-  // Stateの定義
-  const [items, setItems] = useState<Array<Number>>(fixItems);
-
   // 初回実行処理
   useEffect(() => {
     // 最初の一回のみカウント開始
     countTimerStart();
-
-    // 最初の並びを履歴に追加
-    itemHistories.push([...fixItems]);
-    setItemHistories([...itemHistories]);
   }, []);
 
   // イベント関数
@@ -62,12 +55,12 @@ export const PlayField = () => {
 
   // 戻るボタン押下
   const onClickBack = useCallback(() => {
-    console.log("OnClick Back");
     if (count < 1) return;
     setCount(count - 1);
     setItems(itemHistories[count - 1]);
-    setItemHistories([itemHistories.pop()!!]);
-  }, []);
+    itemHistories.pop();
+    setItemHistories([...itemHistories]);
+  }, [count]);
 
   // リセットボタン押下;
   const onClickReset = useCallback(() => {
@@ -91,10 +84,12 @@ export const PlayField = () => {
         <CountStatus />
 
         {/* リスト表示 */}
-        <Order
+        <NumberCardList
           items={items}
           setItems={setItems}
           countTimerStop={countTimerStop}
+          itemHistories={itemHistories}
+          setItemHistories={setItemHistories}
         />
 
         {/* 戻る、リセットボタン 並び替えが未完了の場合表示 */}
