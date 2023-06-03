@@ -3,7 +3,6 @@ import { FC, memo, useCallback, useContext, useEffect } from "react";
 import { CompleteContext } from "~/providers/complete-provider";
 import { Number } from "~/types/number";
 import { ColumnContainer } from "~/components/containers/column-container";
-import { ItemHistoryContext } from "~/providers/item-history-provider";
 import { CountContext } from "~/providers/count-provider";
 import { NumberCard } from "./number-card";
 

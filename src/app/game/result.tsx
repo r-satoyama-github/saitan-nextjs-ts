@@ -10,8 +10,6 @@ import { RankerText } from "../../components/texts/ranker-text";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
 import { Text } from "~/components/texts/text";
-import { CountContext } from "~/providers/count-provider";
-import { SecondsContext } from "~/providers/seconds-provider";
 import { useCountTimer } from "~/hooks/useCountTimer";
 
 export const Result = () => {
@@ -46,11 +44,11 @@ export const Result = () => {
     <>
       <SColumnContainer>
         {/* <Text>{nickName}</Text> */}
-        <Heading1 style={{}}>けっか</Heading1>
+        <Heading1 style={{}}>ケッカ</Heading1>
         <MyResultColumnContainer>
-          <Text>かうんと:{count}</Text>
+          <Text>カウント:{count}カイ</Text>
           <Text>
-            けいか:
+            ケイカジカン:
             {(() => {
               const result2 = new Date(seconds * 1000)
                 .toISOString()
@@ -61,7 +59,7 @@ export const Result = () => {
         </MyResultColumnContainer>
 
         <RankingColumnContainer>
-          <Heading2>らんきんぐ</Heading2>
+          <Heading2>ランキング</Heading2>
           <ColumnContainer>
             <RankerText>ゲスト1さん　２回　10:00</RankerText>
             <RankerText>ゲスト2さん　２回　11:00</RankerText>
@@ -70,8 +68,8 @@ export const Result = () => {
         </RankingColumnContainer>
 
         <ButtonColumnContainer>
-          <PrimaryButton>りとらい</PrimaryButton>
-          <PrimaryButton onClick={onClickFinish}>しゅうりょう</PrimaryButton>
+          <PrimaryButton>リトライ</PrimaryButton>
+          <PrimaryButton onClick={onClickFinish}>シュウリョウ</PrimaryButton>
           {/* <PrimaryLink href="/">終了</PrimaryLink> */}
         </ButtonColumnContainer>
       </SColumnContainer>

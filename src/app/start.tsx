@@ -44,13 +44,13 @@ export const Start = () => {
   return (
     <>
       <SColumnContainer>
-        <Heading1 style={{}}>SAITAN</Heading1>
+        <Heading1 style={{}}>サイタン</Heading1>
         <SButtonColumnContainer>
           <PrimaryButton onClick={onClickPrimary}>
-            ゲストではじめる
+            ゲスト　ハジメル
           </PrimaryButton>
           {/* <PrimaryButton onClick={signInWithGithub}> */}
-          <PrimaryButton>サインインしてから</PrimaryButton>
+          <PrimaryButton>ログイン　ハジメル</PrimaryButton>
           {/* {error && <p>{error}</p>} */}
         </SButtonColumnContainer>
       </SColumnContainer>

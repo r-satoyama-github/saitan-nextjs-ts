@@ -8,7 +8,7 @@ export const CountText: FC = () => {
   const { count } = countContext;
   return (
     <Text>
-      かうんと：<SSpan>{count}</SSpan>
+      カウント：<SSpan>{count}</SSpan>カイ
     </Text>
   );
 };

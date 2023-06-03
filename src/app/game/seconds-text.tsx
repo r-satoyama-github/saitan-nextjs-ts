@@ -7,7 +7,7 @@ export const SecondsText: FC = () => {
   const { seconds } = secondsContext;
   return (
     <Text>
-      けいか：
+      ケイカジカン：
       <SSpan>
         {(() => {
           const result2 = new Date(seconds * 1000).toISOString().slice(14, 19);
