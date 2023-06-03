@@ -22,7 +22,15 @@ export const NumberCard: FC<Props> = (props) => {
         style={{ rotate: "180deg" }}
         alt="DOWN"
       />
-      <Text style={{ fontSize: "20px", fontWeight: "bold" }}>{item.id}</Text>
+      <Text
+        style={{
+          color: "var(--white)",
+          fontSize: "27px",
+          fontWeight: "bold",
+        }}
+      >
+        {item.id}
+      </Text>
       <Image
         src="/triangle.svg"
         onClick={onClickUp}
@@ -35,7 +43,6 @@ export const NumberCard: FC<Props> = (props) => {
 };
 
 const SItemRowContainer = styled(RowContainer)`
-  background-color: var(--yellow-50);
   justify-content: space-around;
   height: 50px;
   align-items: center;

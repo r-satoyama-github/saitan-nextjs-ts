@@ -19,12 +19,20 @@ export const useInit = () => {
   const { setItems, setItemHistories } = itemHistoryContext;
 
   // 変数の定義
+  // const fixItems: Array<Number> = [
+  //   { id: 2, color: "rgba(30, 190, 62,0.5)" },
+  //   { id: 1, color: "rgba(117, 201, 68,0.5)" },
+  //   { id: 3, color: "rgba(22, 3, 123,0.5)" },
+  //   { id: 4, color: "rgba(187, 200, 121,0.5)" },
+  //   { id: 5, color: "rgba(192, 19, 112,0.5)" },
+  // ];
+
   const fixItems: Array<Number> = [
-    { id: 2, color: "rgba(30, 190, 62,0.5)" },
-    { id: 1, color: "rgba(117, 201, 68,0.5)" },
-    { id: 3, color: "rgba(22, 3, 123,0.5)" },
-    { id: 4, color: "rgba(187, 200, 121,0.5)" },
-    { id: 5, color: "rgba(192, 19, 112,0.5)" },
+    { id: 2, color: "#7ac70c" },
+    { id: 1, color: "#faa918" },
+    { id: 3, color: "#14d4f4" },
+    { id: 4, color: "#a560e8" },
+    { id: 5, color: "#e53838" },
   ];
 
   // ゲームの初期化
