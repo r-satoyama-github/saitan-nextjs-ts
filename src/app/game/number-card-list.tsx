@@ -14,7 +14,7 @@ type Props = {
   setItemHistories: (itemHistories: Array<Array<Number>>) => void;
   countTimerStop: () => void;
 };
-export const NumberCardList: FC<Props> = memo((props) => {
+export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
   console.log("NumberCardList Rendering");
   const { items, setItems, countTimerStop, itemHistories, setItemHistories } =
     props;
