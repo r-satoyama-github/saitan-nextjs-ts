@@ -29,9 +29,9 @@ export const Start = () => {
   // const { signInWithGithub, error, session } = useAuth();
 
   // 初回実行処理
-  useEffect(() => {
-    initiateGame();
-  }, []);
+  // useEffect(() => {
+  //   initiateGame();
+  // }, []);
 
   // イベント関数
   // ゲーム画面遷移関数

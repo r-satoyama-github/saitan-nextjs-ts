@@ -4,7 +4,7 @@ import { RowContainer } from "~/components/containers/row-container";
 import { CountText } from "./count-text";
 import { SecondsText } from "./seconds-text";
 
-export const CountStatus: FC = () => {
+export const GameStatus: FC = () => {
   return (
     <SStatusRowContainer>
       <CountText />

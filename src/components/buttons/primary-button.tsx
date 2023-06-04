@@ -34,5 +34,5 @@ export const PrimaryButton: FC<Props> = memo(function PrimaryButton(props) {
 const SButton = styled(BaseButton)`
   color: var(--navy);
   background-color: var(--yellow-50);
-  width: 170px;
+  width: 70%;
 `;

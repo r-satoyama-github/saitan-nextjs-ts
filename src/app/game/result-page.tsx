@@ -11,8 +11,10 @@ import { PrimaryButton } from "~/components/buttons/primary-button";
 import styled from "styled-components";
 import { Text } from "~/components/texts/text";
 import { useCountTimer } from "~/hooks/useCountTimer";
+import { ResultStatus } from "./result-status";
 
-export const Result = () => {
+export const ResultPage = () => {
+  console.log("ResultPage Rendering");
   // Contextの取得
   const gameContext = useContext(GameContext);
   // const countStatusContext = useContext(CountStatusContext);
@@ -45,18 +47,9 @@ export const Result = () => {
       <SColumnContainer>
         {/* <Text>{nickName}</Text> */}
         <Heading1 style={{}}>ケッカ</Heading1>
-        <MyResultColumnContainer>
-          <Text>カウント:{count}カイ</Text>
-          <Text>
-            ケイカジカン:
-            {(() => {
-              const result2 = new Date(seconds * 1000)
-                .toISOString()
-                .slice(14, 19);
-              return result2;
-            })()}
-          </Text>
-        </MyResultColumnContainer>
+
+        {/* 結果の表示 */}
+        <ResultStatus />
 
         <RankingColumnContainer>
           <Heading2>ランキング</Heading2>
@@ -81,14 +74,11 @@ const SColumnContainer = styled(ColumnContainer)`
   height: 90vh;
 `;
 
-const MyResultColumnContainer = styled(ColumnContainer)`
-  height: 20%;
-`;
-
 const RankingColumnContainer = styled(ColumnContainer)`
   height: 40%;
+  justify-content: center;
 `;
 const ButtonColumnContainer = styled(ColumnContainer)`
-  justify-content: space-evenly;
+  justify-content: center;
   height: 20%;
 `;
