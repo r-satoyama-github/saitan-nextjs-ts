@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { FC, useContext, useEffect } from "react";
 import styled from "styled-components";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import { ColumnContainer } from "~/components/containers/column-container";
@@ -10,8 +10,13 @@ import { CompleteContext } from "~/providers/complete-provider";
 import { GameContext } from "~/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
 import { Heading2 } from "~/components/texts/heading2";
+import { LevelContext } from "~/providers/level-provider";
 
-export const Start = () => {
+type Props = {
+  setIsMenu: (isMenu: boolean) => void;
+};
+export const Start: FC<Props> = (props) => {
+  const { setIsMenu } = props;
   // Contextの取得
   const context = useContext(GameContext);
   const completeContext = useContext(CompleteContext);
@@ -37,7 +42,8 @@ export const Start = () => {
   // ゲーム画面遷移関数
   const onClickPrimary = () => {
     setUser("TEST USER");
-    router.push("/game");
+    setIsMenu(true);
+    // router.push("/game");
   };
 
   // if (session) router.push("/game");

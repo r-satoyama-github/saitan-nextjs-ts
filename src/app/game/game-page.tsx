@@ -15,6 +15,7 @@ import { Number } from "~/types/number";
 import { ItemHistoryContext } from "~/providers/item-history-provider";
 import { CountContext } from "~/providers/count-provider";
 import { SecondsContext } from "~/providers/seconds-provider";
+import { LevelContext } from "~/providers/level-provider";
 
 export const GamePage = () => {
   console.log("GamePage Rendering");
@@ -23,6 +24,7 @@ export const GamePage = () => {
   const secondsContext = useContext(SecondsContext);
   const completeContext = useContext(CompleteContext);
   const itemHistoryContext = useContext(ItemHistoryContext);
+  const levelContext = useContext(LevelContext);
 
   // Contextから関数の取得
   const { count, setCount } = countContext;
@@ -30,6 +32,9 @@ export const GamePage = () => {
   const { isComplete, setIsPlaying } = completeContext;
   const { items, setItems, itemHistories, setItemHistories } =
     itemHistoryContext;
+  const { level } = levelContext;
+
+  console.log("GamePage Renderring Level", level);
 
   // 初回実行処理
   useEffect(() => {

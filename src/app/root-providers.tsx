@@ -5,6 +5,7 @@ import { CompleteProvider } from "~/providers/complete-provider";
 import { CountProvider } from "~/providers/count-provider";
 import { GameProvider } from "~/providers/game-provider";
 import { ItemHistoryProvider } from "~/providers/item-history-provider";
+import { LevelProvider } from "~/providers/level-provider";
 import { SecondsProvider } from "~/providers/seconds-provider";
 
 type Props = {
@@ -14,13 +15,15 @@ export const RootProviders: FC<Props> = (props) => {
   const { children } = props;
   return (
     <GameProvider>
-      <CompleteProvider>
-        <SecondsProvider>
-          <CountProvider>
-            <ItemHistoryProvider>{children}</ItemHistoryProvider>
-          </CountProvider>
-        </SecondsProvider>
-      </CompleteProvider>
+      <LevelProvider>
+        <CompleteProvider>
+          <SecondsProvider>
+            <CountProvider>
+              <ItemHistoryProvider>{children}</ItemHistoryProvider>
+            </CountProvider>
+          </SecondsProvider>
+        </CompleteProvider>
+      </LevelProvider>
     </GameProvider>
   );
 };
