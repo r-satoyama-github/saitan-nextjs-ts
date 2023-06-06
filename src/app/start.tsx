@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import { useRouter } from "next/navigation";
 import { FC, useContext, useEffect } from "react";
 import styled from "styled-components";
@@ -16,6 +16,8 @@ type Props = {
   setIsMenu: (isMenu: boolean) => void;
 };
 export const Start: FC<Props> = (props) => {
+  console.log("ENV START", process.env.url);
+  console.log("ENV START", process.env.apikey);
   const { setIsMenu } = props;
   // Contextの取得
   const context = useContext(GameContext);

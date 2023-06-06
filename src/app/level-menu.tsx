@@ -2,24 +2,23 @@ import { useCallback, useContext, useState } from "react";
 import { ColumnContainer } from "~/components/containers/column-container";
 import Select from "react-select";
 import { LevelContext } from "~/providers/level-provider";
-import { useRouter } from "next/navigation";
-import { GridContainer } from "~/components/containers/grid-container";
-import { LevelCard } from "./level-card";
 import { Heading2 } from "~/components/texts/heading2";
-import { Heading1 } from "~/components/texts/heading1";
-import { useMenu } from "~/hooks/useMenu";
+import { LevelMenuList } from "./level-menu-list";
+import { useLevel } from "~/hooks/useLevel";
 
 type SelectOption = {
-  value: string;
+  value: number;
   label: string;
 };
 const options: Array<SelectOption> = [
-  { value: "line", label: "AAAA" },
-  { value: "bar", label: "BBBB" },
-  { value: "pie", label: "CCC" },
+  { value: 3, label: "レベル3" },
+  { value: 4, label: "レベル4" },
+  { value: 5, label: "レベル5" },
 ];
+// const options: Array<SelectOption> = [];
 
 export const LevelMenu = () => {
+  console.log("LevelMenu Rendering");
   // Contextの取得
   const levelContext = useContext(LevelContext);
 
@@ -27,43 +26,33 @@ export const LevelMenu = () => {
   const { level, setLevel } = levelContext;
 
   // Hooks
-  const router = useRouter();
-  const { questions } = useMenu();
+  const { levels } = useLevel();
+
+  console.log("LevelMenu Rendering Levels", levels);
+  console.log("LevelMenu Rendering Options", options);
 
   const [selectedValue, setSelectedValue] = useState(options[0]);
 
-  const onChangeSelect = (value: SelectOption) => {
-    value ? setSelectedValue(value) : null;
-  };
-  const onClickLevel = useCallback((item: number) => {
-    router.replace("/game");
+  const onChangeSelect = useCallback((option: SelectOption) => {
+    console.log("Selected Changed", option);
+    option ? setSelectedValue(option) : null;
   }, []);
 
-  const data: Array<number> = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
   return (
     <>
-      {console.log("LevelMenu", questions)}
+      {console.log("LevelMenu Rendering Selected", selectedValue)}
       <ColumnContainer>
         <Heading2 style={{ margin: "20px 0px" }}>
           レベルヲ　センタクスル
         </Heading2>
-        {/* <Select
+        <Select
           options={options}
           defaultValue={selectedValue}
-          onChange={(value) => onChangeSelect(value!!)}
-        /> */}
-        <GridContainer>
-          {questions.map((item) => {
-            return (
-              <LevelCard
-                key={item.question_id}
-                onClick={() => onClickLevel(item.number)}
-              >
-                {item.number}
-              </LevelCard>
-            );
-          })}
-        </GridContainer>
+          // onChange={(option) => onChangeSelect(selectedValue)}
+          onChange={(option) => onChangeSelect(option!!)}
+        />
+
+        <LevelMenuList selectedLevel={selectedValue.value} />
       </ColumnContainer>
     </>
   );

@@ -1,15 +1,22 @@
-import { FC, ReactNode } from "react";
+"use client";
+import { useRouter } from "next/navigation";
+import { FC, ReactNode, useCallback } from "react";
 import styled from "styled-components";
 import { ChildrenStyleProps } from "~/types/children-style-props";
 type Props = {
   children: number;
   style?: {};
-  onClick: () => void;
 };
 export const LevelCard: FC<Props> = (props) => {
-  const { children, style, onClick } = props;
+  const router = useRouter();
+
+  const onClickLevel = useCallback((item: number) => {
+    router.replace("/game");
+  }, []);
+
+  const { children, style } = props;
   return (
-    <SDiv style={style} onClick={onClick}>
+    <SDiv style={style} onClick={() => onClickLevel(children)}>
       <SP>{children}</SP>
     </SDiv>
   );
