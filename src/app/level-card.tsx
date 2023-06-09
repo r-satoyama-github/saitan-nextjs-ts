@@ -16,7 +16,8 @@ export const LevelCard: FC<Props> = (props) => {
   const router = useRouter();
 
   const onClickLevel = useCallback((item: number) => {
-    router.replace(`/game?qn=${question.question_id}`);
+    // router.replace(`/game?qn=${question.question_id}`);
+    router.push(`/game?qn=${question.question_id}`);
   }, []);
 
   return (

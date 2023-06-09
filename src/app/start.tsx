@@ -5,7 +5,6 @@ import styled from "styled-components";
 import { PrimaryButton } from "~/components/buttons/primary-button";
 import { ColumnContainer } from "~/components/containers/column-container";
 import useAuth from "~/hooks/useAuth";
-import { useInit } from "~/hooks/useInit";
 import { CompleteContext } from "~/providers/complete-provider";
 import { GameContext } from "~/providers/game-provider";
 import { Heading1 } from "~/components/texts/heading1";
@@ -20,25 +19,24 @@ export const Start: FC<Props> = (props) => {
   console.log("ENV START", process.env.apikey);
   const { setIsMenu } = props;
   // Contextの取得
-  const context = useContext(GameContext);
+  const gameContext = useContext(GameContext);
   const completeContext = useContext(CompleteContext);
 
   // Contextから関数の取得
-  const { user, setUser } = context;
+  const { user, setUser } = gameContext;
+  const { setIsComplete, setIsPlaying } = completeContext;
 
   // Hooksの取得
   const router = useRouter();
-
-  // カスタムHooksの取得
-  const { initiateGame } = useInit();
 
   // Auth Github
   // const { signInWithGithub, error, session } = useAuth();
 
   // 初回実行処理
-  // useEffect(() => {
-  //   initiateGame();
-  // }, []);
+  useEffect(() => {
+    setIsComplete(false);
+    setIsPlaying(true);
+  }, []);
 
   // イベント関数
   // ゲーム画面遷移関数

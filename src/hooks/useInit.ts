@@ -48,8 +48,6 @@ export const useInit = () => {
     setSeconds(0);
     setIsComplete(false);
     setIsPlaying(true);
-    // setItems(fixItems);
-    // setItemHistories([fixItems]);
     console.log("useInit initiateGame qustionNumbers", questionNumbers);
     setItems(questionNumbers);
     setItemHistories([questionNumbers]);
