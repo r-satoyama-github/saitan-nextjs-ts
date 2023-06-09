@@ -9,14 +9,15 @@ import { Database } from "~/types/database.types";
 type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
 type Props = {
   item: QuestionNumber;
+  color: string;
   onClickUp: () => void;
   onClickDown: () => void;
 };
 export const NumberCard: FC<Props> = (props) => {
-  const { item, onClickUp, onClickDown } = props;
+  const { item, onClickUp, onClickDown, color } = props;
   return (
     // <SItemRowContainer style={{ backgroundColor: item.color }}>
-    <SItemRowContainer style={{ backgroundColor: "red" }}>
+    <SItemRowContainer style={{ backgroundColor: color }}>
       <Image
         src="/triangle.svg"
         onClick={onClickDown}

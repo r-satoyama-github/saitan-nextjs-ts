@@ -1,19 +1,28 @@
 "use client";
 import { FC, memo, useCallback, useContext, useEffect } from "react";
 import { CompleteContext } from "~/providers/complete-provider";
-import { Number } from "~/types/number";
 import { ColumnContainer } from "~/components/containers/column-container";
 import { CountContext } from "~/providers/count-provider";
 import { NumberCard } from "./number-card";
 import { Database } from "~/types/database.types";
 
-// type Props = {
-//   items: Array<Number>;
-//   setItems: (items: Array<Number>) => void;
-//   itemHistories: Array<Array<Number>>;
-//   setItemHistories: (itemHistories: Array<Array<Number>>) => void;
-//   countTimerStop: () => void;
-// };
+const colors: Array<string> = [
+  "#7ac70c",
+  "#faa918",
+  "#14d4f4",
+  "#a560e8",
+  "#e53838",
+  "#31B9B0",
+  "#559CEE",
+  "#E2E745",
+  "#F56452",
+  "#EFCFEB",
+  "#2C99E2",
+  "#8153CF",
+  "#00F998",
+  "#F36823",
+];
+
 type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
 type Props = {
   items: Array<QuestionNumber>;
@@ -85,6 +94,7 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
             <NumberCard
               key={item.question_number_id}
               item={item}
+              color={colors[index]}
               onClickUp={() => onClickUp(index)}
               onClickDown={() => onClickDown(index)}
             />
