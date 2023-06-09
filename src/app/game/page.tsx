@@ -8,24 +8,16 @@ import { CompleteContext } from "~/providers/complete-provider";
 import { ResultPage } from "./result-page";
 import { GamePage } from "./game-page";
 import { useInit } from "~/hooks/useInit";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function Page() {
-  console.log("Game Page Rendering");
+  console.log("Game/Page Rendering");
   // Contextの取得
   const completeContext = useContext(CompleteContext);
 
   // Contextから関数の取得
   const { isComplete, isPlaying } = completeContext;
 
-  // カスタムHooksの取得
-  const { initiateGame } = useInit();
-
-  // const { session } = useAuth();
-
-  // 初回実行処理
-  useEffect(() => {
-    initiateGame();
-  }, []);
   return (
     <>
       <ColumnContainer>

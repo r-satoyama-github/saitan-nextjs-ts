@@ -4,16 +4,19 @@ import { Text } from "~/components/texts/text";
 import { Number } from "~/types/number";
 import styled from "styled-components";
 import { RowContainer } from "~/components/containers/row-container";
+import { Database } from "~/types/database.types";
 
+type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
 type Props = {
-  item: Number;
+  item: QuestionNumber;
   onClickUp: () => void;
   onClickDown: () => void;
 };
 export const NumberCard: FC<Props> = (props) => {
   const { item, onClickUp, onClickDown } = props;
   return (
-    <SItemRowContainer key={item.id} style={{ backgroundColor: item.color }}>
+    // <SItemRowContainer style={{ backgroundColor: item.color }}>
+    <SItemRowContainer style={{ backgroundColor: "red" }}>
       <Image
         src="/triangle.svg"
         onClick={onClickDown}
@@ -29,7 +32,7 @@ export const NumberCard: FC<Props> = (props) => {
           fontWeight: "bold",
         }}
       >
-        {item.id}
+        {item.number}
       </Text>
       <Image
         src="/triangle.svg"

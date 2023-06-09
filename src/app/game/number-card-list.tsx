@@ -5,16 +5,25 @@ import { Number } from "~/types/number";
 import { ColumnContainer } from "~/components/containers/column-container";
 import { CountContext } from "~/providers/count-provider";
 import { NumberCard } from "./number-card";
+import { Database } from "~/types/database.types";
 
+// type Props = {
+//   items: Array<Number>;
+//   setItems: (items: Array<Number>) => void;
+//   itemHistories: Array<Array<Number>>;
+//   setItemHistories: (itemHistories: Array<Array<Number>>) => void;
+//   countTimerStop: () => void;
+// };
+type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
 type Props = {
-  items: Array<Number>;
-  setItems: (items: Array<Number>) => void;
-  itemHistories: Array<Array<Number>>;
-  setItemHistories: (itemHistories: Array<Array<Number>>) => void;
+  items: Array<QuestionNumber>;
+  setItems: (items: Array<QuestionNumber>) => void;
+  itemHistories: Array<Array<QuestionNumber>>;
+  setItemHistories: (itemHistories: Array<Array<QuestionNumber>>) => void;
   countTimerStop: () => void;
 };
 export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
-  console.log("NumberCardList Rendering");
+  // console.log("NumberCardList Rendering");
   const { items, setItems, countTimerStop, itemHistories, setItemHistories } =
     props;
 
@@ -27,7 +36,8 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
   const { setIsComplete } = completeContext;
 
   // イベント関数
-  const CheckOrderAndCountUp = (tmpItems: Array<Number>) => {
+  // const CheckOrderAndCountUp = (tmpItems: Array<Number>) => {
+  const CheckOrderAndCountUp = (tmpItems: Array<QuestionNumber>) => {
     console.log("CountUP", count);
     // 並び替えカウントアップ
     setCount(count + 1);
@@ -39,9 +49,11 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
     }
 
     // 並び替え履歴に追加
+    // setItemHistories([...itemHistories, tmpItems]);
     setItemHistories([...itemHistories, tmpItems]);
 
     // 表示するリストに再セット
+    // setItems([...tmpItems]);
     setItems([...tmpItems]);
   };
 
@@ -68,10 +80,10 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
   return (
     <>
       <ColumnContainer>
-        {items.map((item: Number, index: number) => {
+        {items.map((item: QuestionNumber, index: number) => {
           return (
             <NumberCard
-              key={item.id}
+              key={item.question_number_id}
               item={item}
               onClickUp={() => onClickUp(index)}
               onClickDown={() => onClickDown(index)}
@@ -84,9 +96,9 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
 });
 
 // 並びのチェック
-const IsOrdered = (until: number, items: Array<Number>) => {
+const IsOrdered = (until: number, items: Array<QuestionNumber>) => {
   for (let i = 0; i < until; i++) {
-    if (items[i].id != i + 1) {
+    if (items[i].number != i + 1) {
       return false;
     }
   }

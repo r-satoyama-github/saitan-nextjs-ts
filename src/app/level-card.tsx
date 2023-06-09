@@ -3,18 +3,22 @@ import { useRouter } from "next/navigation";
 import { FC, ReactNode, useCallback } from "react";
 import styled from "styled-components";
 import { ChildrenStyleProps } from "~/types/children-style-props";
+import { Database } from "~/types/database.types";
+type Question = Database["public"]["Tables"]["questions"]["Row"];
 type Props = {
+  question: Question;
   children: number;
   style?: {};
 };
 export const LevelCard: FC<Props> = (props) => {
+  const { children, style, question } = props;
+
   const router = useRouter();
 
   const onClickLevel = useCallback((item: number) => {
-    router.replace("/game");
+    router.replace(`/game?qn=${question.question_id}`);
   }, []);
 
-  const { children, style } = props;
   return (
     <SDiv style={style} onClick={() => onClickLevel(children)}>
       <SP>{children}</SP>

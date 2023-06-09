@@ -27,7 +27,7 @@ type Props = {
   selectedLevel: number;
 };
 export const LevelMenuList: FC<Props> = (props) => {
-  const { selectedLevel } = props;
+  const { selectedLevel = 3 } = props;
   const { questions } = useQuestion(selectedLevel);
   console.log("LevelMenuList Rendering", selectedLevel);
   console.log("LevelMenuList Rendering", questions);
@@ -38,7 +38,11 @@ export const LevelMenuList: FC<Props> = (props) => {
   return (
     <GridContainer>
       {questions.map((item) => {
-        return <LevelCard key={item.question_id}>{item.number}</LevelCard>;
+        return (
+          <LevelCard key={item.question_id} question={item}>
+            {item.number}
+          </LevelCard>
+        );
       })}
     </GridContainer>
   );

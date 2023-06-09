@@ -4,8 +4,14 @@ import { CountContext } from "~/providers/count-provider";
 import { SecondsContext } from "~/providers/seconds-provider";
 import { ItemHistoryContext } from "~/providers/item-history-provider";
 import { Number } from "~/types/number";
+import { useQuestionNumber } from "./useQuestionNumber";
+import { Database } from "~/types/database.types";
 
+type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
+
+// export const useInit = (questionNumbers: Array<QuestionNumber>) => {
 export const useInit = () => {
+  console.log("useInit Rendering");
   // Contextの取得
   const countStatusContext = useContext(CountContext);
   const secondsContext = useContext(SecondsContext);
@@ -27,22 +33,26 @@ export const useInit = () => {
   //   { id: 5, color: "rgba(192, 19, 112,0.5)" },
   // ];
 
-  const fixItems: Array<Number> = [
-    { id: 2, color: "#7ac70c" },
-    { id: 1, color: "#faa918" },
-    { id: 3, color: "#14d4f4" },
-    { id: 4, color: "#a560e8" },
-    { id: 5, color: "#e53838" },
-  ];
+  // const fixItems: Array<Number> = [
+  //   { id: 2, color: "#7ac70c" },
+  //   { id: 1, color: "#faa918" },
+  //   { id: 3, color: "#14d4f4" },
+  //   { id: 4, color: "#a560e8" },
+  //   { id: 5, color: "#e53838" },
+  // ];
+  const fixItems: Array<Number> = [];
 
   // ゲームの初期化
-  const initiateGame = () => {
+  const initiateGame = (questionNumbers: Array<QuestionNumber>) => {
     setCount(0);
     setSeconds(0);
     setIsComplete(false);
     setIsPlaying(true);
-    setItems(fixItems);
-    setItemHistories([fixItems]);
+    // setItems(fixItems);
+    // setItemHistories([fixItems]);
+    console.log("useInit initiateGame qustionNumbers", questionNumbers);
+    setItems(questionNumbers);
+    setItemHistories([questionNumbers]);
   };
 
   return { initiateGame };

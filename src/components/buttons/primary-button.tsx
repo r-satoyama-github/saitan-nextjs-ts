@@ -8,7 +8,7 @@ type Props = {
   style?: {};
 };
 export const PrimaryButton: FC<Props> = memo(function PrimaryButton(props) {
-  console.log("PrimaryButton Rendering");
+  // console.log("PrimaryButton Rendering");
   const { children, onClick, style } = props;
   return (
     <>

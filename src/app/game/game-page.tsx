@@ -16,6 +16,9 @@ import { ItemHistoryContext } from "~/providers/item-history-provider";
 import { CountContext } from "~/providers/count-provider";
 import { SecondsContext } from "~/providers/seconds-provider";
 import { LevelContext } from "~/providers/level-provider";
+import { useSearchParams } from "next/navigation";
+import { useInit } from "~/hooks/useInit";
+import { useQuestionNumber } from "~/hooks/useQuestionNumber";
 
 export const GamePage = () => {
   console.log("GamePage Rendering");
@@ -34,13 +37,30 @@ export const GamePage = () => {
     itemHistoryContext;
   const { level } = levelContext;
 
-  console.log("GamePage Renderring Level", level);
+  // Hooks
+  const router = useSearchParams();
+  const qn = router.get("qn");
+
+  const { questionNumbers, fetchQuestionNumbers } = useQuestionNumber(
+    qn ?? "1"
+  );
+
+  // カスタムHooksの取得
+  const { initiateGame } = useInit();
+
+  // const { session } = useAuth();
 
   // 初回実行処理
   useEffect(() => {
+    console.log("GamePage useEffect");
     // 最初の一回のみカウント開始
     countTimerStart();
   }, []);
+
+  useEffect(() => {
+    console.log("GamePage useEffect questionNumbers");
+    initiateGame(questionNumbers);
+  }, [questionNumbers]);
 
   // イベント関数
   // 結果ボタン押下
@@ -60,8 +80,6 @@ export const GamePage = () => {
   // リセットボタン押下;
   const onClickReset = useCallback(() => {
     console.log("ResetButton Clicked");
-    // 経過時間を00:00にする必要がある
-    // stop();
     // 画面のリロード
     // router.refresh();
     if (confirm("リセット スル？")) {

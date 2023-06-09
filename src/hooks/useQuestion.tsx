@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import supabase, { Question } from "~/lib/supabase";
+import supabase from "~/lib/supabase";
 import { Database } from "~/types/database.types";
 
-type Level = Database["public"]["Tables"]["levels"]["Row"];
+type Question = Database["public"]["Tables"]["questions"]["Row"];
 
 export const useQuestion = (selectedLevel: number) => {
   const [questions, setQuestions] = useState<Array<Question>>([]);

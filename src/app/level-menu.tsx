@@ -5,6 +5,7 @@ import { LevelContext } from "~/providers/level-provider";
 import { Heading2 } from "~/components/texts/heading2";
 import { LevelMenuList } from "./level-menu-list";
 import { useLevel } from "~/hooks/useLevel";
+import { SelectLevelOption } from "~/types/select-level-option";
 
 type SelectOption = {
   value: number;
@@ -15,7 +16,7 @@ const options: Array<SelectOption> = [
   { value: 4, label: "レベル4" },
   { value: 5, label: "レベル5" },
 ];
-// const options: Array<SelectOption> = [];
+// const options: Array<SelectLevelOption> = [];
 
 export const LevelMenu = () => {
   console.log("LevelMenu Rendering");
@@ -29,8 +30,8 @@ export const LevelMenu = () => {
   const { levels } = useLevel();
 
   console.log("LevelMenu Rendering Levels", levels);
-  console.log("LevelMenu Rendering Options", options);
 
+  // const [selectedValue, setSelectedValue] = useState(levels[0]);
   const [selectedValue, setSelectedValue] = useState(options[0]);
 
   const onChangeSelect = useCallback((option: SelectOption) => {
@@ -48,7 +49,6 @@ export const LevelMenu = () => {
         <Select
           options={options}
           defaultValue={selectedValue}
-          // onChange={(option) => onChangeSelect(selectedValue)}
           onChange={(option) => onChangeSelect(option!!)}
         />
 

@@ -32,7 +32,6 @@ export const SecondsProvider: FC<Props> = (props) => {
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const countTimerStart = useCallback(() => {
-    console.log("Count Start Called");
     if (intervalRef.current !== null) {
       return;
     }
