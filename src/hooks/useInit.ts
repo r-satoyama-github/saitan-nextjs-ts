@@ -6,6 +6,7 @@ import { ItemHistoryContext } from "~/providers/item-history-provider";
 import { Number } from "~/types/number";
 import { useQuestionNumber } from "./useQuestionNumber";
 import { Database } from "~/types/database.types";
+import { QuestionNumberWithColor } from "~/types/question-number-with-color";
 
 type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
 
@@ -36,7 +37,7 @@ export const useInit = () => {
   const fixItems: Array<Number> = [];
 
   // ゲームの初期化
-  const initiateGame = (questionNumbers: Array<QuestionNumber>) => {
+  const initiateGame = (questionNumbers: Array<QuestionNumberWithColor>) => {
     setCount(0);
     setSeconds(0);
     setIsComplete(false);

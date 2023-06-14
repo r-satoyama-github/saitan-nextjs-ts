@@ -41,7 +41,7 @@ export const GamePage = () => {
   const router = useSearchParams();
   const qn = router.get("qn");
 
-  const { questionNumbers, fetchQuestionNumbers } = useQuestionNumber(
+  const { questionNumberWithColors, fetchQuestionNumbers } = useQuestionNumber(
     qn ?? "1"
   );
 
@@ -59,8 +59,8 @@ export const GamePage = () => {
 
   useEffect(() => {
     console.log("GamePage useEffect questionNumbers");
-    initiateGame(questionNumbers);
-  }, [questionNumbers]);
+    initiateGame(questionNumberWithColors);
+  }, [questionNumberWithColors]);
 
   // イベント関数
   // 結果ボタン押下

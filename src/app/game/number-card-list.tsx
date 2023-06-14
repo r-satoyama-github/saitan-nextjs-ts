@@ -5,30 +5,16 @@ import { ColumnContainer } from "~/components/containers/column-container";
 import { CountContext } from "~/providers/count-provider";
 import { NumberCard } from "./number-card";
 import { Database } from "~/types/database.types";
-
-const colors: Array<string> = [
-  "#7ac70c",
-  "#faa918",
-  "#14d4f4",
-  "#a560e8",
-  "#e53838",
-  "#31B9B0",
-  "#559CEE",
-  "#E2E745",
-  "#F56452",
-  "#EFCFEB",
-  "#2C99E2",
-  "#8153CF",
-  "#00F998",
-  "#F36823",
-];
+import { QuestionNumberWithColor } from "~/types/question-number-with-color";
 
 type QuestionNumber = Database["public"]["Tables"]["question_numbers"]["Row"];
 type Props = {
-  items: Array<QuestionNumber>;
-  setItems: (items: Array<QuestionNumber>) => void;
-  itemHistories: Array<Array<QuestionNumber>>;
-  setItemHistories: (itemHistories: Array<Array<QuestionNumber>>) => void;
+  items: Array<QuestionNumberWithColor>;
+  setItems: (items: Array<QuestionNumberWithColor>) => void;
+  itemHistories: Array<Array<QuestionNumberWithColor>>;
+  setItemHistories: (
+    itemHistories: Array<Array<QuestionNumberWithColor>>
+  ) => void;
   countTimerStop: () => void;
 };
 export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
@@ -46,7 +32,7 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
 
   // イベント関数
   // const CheckOrderAndCountUp = (tmpItems: Array<Number>) => {
-  const CheckOrderAndCountUp = (tmpItems: Array<QuestionNumber>) => {
+  const CheckOrderAndCountUp = (tmpItems: Array<QuestionNumberWithColor>) => {
     console.log("CountUP", count);
     // 並び替えカウントアップ
     setCount(count + 1);
@@ -89,12 +75,13 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
   return (
     <>
       <ColumnContainer>
-        {items.map((item: QuestionNumber, index: number) => {
+        {/* {items.map((item: QuestionNumber, index: number) => { */}
+        {items.map((item: QuestionNumberWithColor, index: number) => {
           return (
             <NumberCard
-              key={item.question_number_id}
-              item={item}
-              color={colors[index]}
+              key={item.questionNumber.question_number_id}
+              item={item.questionNumber}
+              color={item.color}
               onClickUp={() => onClickUp(index)}
               onClickDown={() => onClickDown(index)}
             />
@@ -106,9 +93,9 @@ export const NumberCardList: FC<Props> = memo(function NumberCardList(props) {
 });
 
 // 並びのチェック
-const IsOrdered = (until: number, items: Array<QuestionNumber>) => {
+const IsOrdered = (until: number, items: Array<QuestionNumberWithColor>) => {
   for (let i = 0; i < until; i++) {
-    if (items[i].number != i + 1) {
+    if (items[i].questionNumber.number != i + 1) {
       return false;
     }
   }
